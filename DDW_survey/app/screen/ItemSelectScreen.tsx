@@ -198,7 +198,8 @@ export default function ItemSelectScreen() {
         fontWeight: 'bold',
     },
     scrollContainer: {
-      flex: 1
+      flex: 1,
+      width: "80%"
     },
     itemContainer:{
       flexDirection: 'row',
