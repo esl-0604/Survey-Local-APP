@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/Endo_Icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "host.exp.Exponent"
