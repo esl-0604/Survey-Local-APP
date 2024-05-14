@@ -18,7 +18,7 @@ export default function PercentageBar ({ percentage } : PercentageBarProps) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 15,
+    height: 14,
     backgroundColor: '#f0f0f0',
     borderRadius: 10,
     overflow: 'hidden',
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   percentageBar: {
     height: '100%',
-    backgroundColor: '#007bff',
+    backgroundColor: '#0075FF',
     borderRadius: 10,
   },
   percentageText: {
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     right: 10,
     top: 1,
     color: 'black',
-    fontSize: 10,
+    fontSize: 9,
+    fontWeight: "bold"
   }
 });

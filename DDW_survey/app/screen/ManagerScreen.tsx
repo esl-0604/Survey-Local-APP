@@ -10,14 +10,8 @@ export default function ManagerScreen() {
 
     const [warningModalOn, setWarningModalOn] = useState<boolean>(false);
     
-    const colorSet = ['#009FFF', '#BDB2FA', '#93FCF8', '#FFA5BA', '#FFC93C', '#FF6F3C', '#A1E44D', '#6EC5E9'];
-    const gradientCenterColorSet = ['#006DFF', '#8F80F3', '#3BE9DE', '#FF7F97', '#006DFF', '#8F80F3', '#3BE9DE', '#FF7F97'];
-
-    const data = new Array(20).fill(null).map((_, index) => ({
-        id: index + 1,
-        DateTime: new Date().toLocaleString(),
-        Item: `Item ${index + 1}`,
-      }));
+    const colorSet = ['#009FFF', '#BDB2FA', '#93FCF8', '#FFA5BA', '#FFF47C', '#FF6F3C'];
+    const gradientCenterColorSet = ['#006DFF', '#8F80F3', '#3BE9DE', '#FF7F97', '#F0BD38', '#FFA07A'];
 
     const pieData=surveyPersentage.map((item : any) => {
         return(
@@ -51,27 +45,40 @@ export default function ManagerScreen() {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 marginBottom: 10,
-                marginTop: 30
+                marginTop: 30,
               }}>
               <View
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  width: 150,
-                  marginRight: 20,
+                  width: 120,
+                  marginRight: 35,
                 }}>
-                {renderDot('#006DFF')}
-                <Text style={{color: '#232B5D'}}>Robopera: {
+                {renderDot('#009FFF')}
+                <Text style={{color: '#232B5D'}}>Cubot: {
                 (surveyPersentage.find((item : any) => item.id === "0")?.num)
                 ?(surveyPersentage.find((item : any) => item.id === "0")?.num)
                 : 0}</Text>
               </View>
               <View
-                style={{flexDirection: 'row', alignItems: 'center', width: 150}}>
-                {renderDot('#8F80F3')}
-                <Text style={{color: '#232B5D'}}>Endo Cubot: {
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  width: 120,
+                  marginRight: 35,
+                }}>
+                {renderDot('#BDB2FA')}
+                <Text style={{color: '#232B5D'}}>Rolling stitch: {
                 (surveyPersentage.find((item : any) => item.id === "1")?.num)
                 ?(surveyPersentage.find((item : any) => item.id === "1")?.num)
+                : 0}</Text>
+              </View>
+              <View
+                style={{flexDirection: 'row', alignItems: 'center', width: 120}}>
+                {renderDot('#93FCF8')}
+                <Text style={{color: '#232B5D'}}>TraCloser: {
+                (surveyPersentage.find((item : any) => item.id === "2")?.num)
+                ?(surveyPersentage.find((item : any) => item.id === "2")?.num)
                 : 0}</Text>
               </View>
             </View>
@@ -81,21 +88,34 @@ export default function ManagerScreen() {
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  width: 150,
-                  marginRight: 20,
+                  width: 120,
+                  marginRight: 35,
                 }}>
-                {renderDot('#3BE9DE')}
-                <Text style={{color: '#232B5D'}}>Rolling Stitch: {
-                (surveyPersentage.find((item : any) => item.id === "2")?.num)
-                ?(surveyPersentage.find((item : any) => item.id === "2")?.num)
-                : 0}</Text>
-              </View>
-              <View
-                style={{flexDirection: 'row', alignItems: 'center', width: 150}}>
-                {renderDot('#FF7F97')}
+                {renderDot('#FFA5BA')}
                 <Text style={{color: '#232B5D'}}>Rolling Channel: {
                 (surveyPersentage.find((item : any) => item.id === "3")?.num)
                 ?(surveyPersentage.find((item : any) => item.id === "3")?.num)
+                : 0}</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  width: 120,
+                  marginRight: 35,
+                }}>
+                {renderDot('#FFF47C')}
+                <Text style={{color: '#232B5D'}}>Insertrument: {
+                (surveyPersentage.find((item : any) => item.id === "4")?.num)
+                ?(surveyPersentage.find((item : any) => item.id === "4")?.num)
+                : 0}</Text>
+              </View>
+              <View
+                style={{flexDirection: 'row', alignItems: 'center', width: 120}}>
+                {renderDot('#FF6F3C')}
+                <Text style={{color: '#232B5D'}}>Robopera: {
+                (surveyPersentage.find((item : any) => item.id === "5")?.num)
+                ?(surveyPersentage.find((item : any) => item.id === "5")?.num)
                 : 0}</Text>
               </View>
             </View>
@@ -108,10 +128,10 @@ export default function ManagerScreen() {
         {warningModalOn ? <WarningModal modalOn={warningModalOn} setModalOn={setWarningModalOn} /> : null}
         <View style={styles.titleContainer}>
             <View>
-                <Text style={styles.title}>설문 데이터</Text>
+                <Text style={styles.title}>Result</Text>
             </View>
             <View>
-                <Text style={styles.subtitle}>설문 결과를 확인하세요!</Text>
+                <Text style={styles.subtitle}>Check the Survey Data.</Text>
             </View>
             <TouchableOpacity 
                 onPress={() => setWarningModalOn(true)}

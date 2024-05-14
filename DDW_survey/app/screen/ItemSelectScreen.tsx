@@ -48,15 +48,15 @@ export default function ItemSelectScreen() {
       <View style={styles.Container}>
           <View style={styles.titleContainer}>
             <View>
-            <Text style={styles.title}>제품 설문</Text>
+            <Text style={styles.title}>Product Preference Survey</Text>
             </View>
             <View>
-            <Text style={styles.subtitle}>엔도로보틱스의 제품을 선택해주세요!</Text>
+            <Text style={styles.subtitle}>Please select the products you are interested in.</Text>
             </View>
           </View>
           {isSelected 
           ?<View style={styles.CompleteTextContainer}>
-            <Text style={styles.CompleteText}>감사합니다.</Text>
+            <Text style={styles.CompleteText}>Thank you.</Text>
             <View 
                 style={styles.buttonCotainer}>
                 <View style={styles.imgContainer}>
@@ -75,13 +75,13 @@ export default function ItemSelectScreen() {
                     activeOpacity={0.5}
                     style={styles.modalButton1}
                     onPress={SelectItemCancle}>
-                    <Text style={styles.ButtonText1}>투표 취소</Text>
+                    <Text style={styles.ButtonText1}>Cancle</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     activeOpacity={0.5}
                     style={styles.modalButton2}
                     onPress={SelectItemConfirm}>
-                    <Text style={styles.ButtonText2}>투표 완료</Text>
+                    <Text style={styles.ButtonText2}>Confirm</Text>
                 </TouchableOpacity>
             </View>
           </View>
@@ -133,7 +133,7 @@ export default function ItemSelectScreen() {
     titleContainer:{
       justifyContent: 'flex-start',
       alignItems: 'center',
-      height: '15%',
+      height: 75,
       width: "100%",
       backgroundColor: 'white',
     },
@@ -155,15 +155,17 @@ export default function ItemSelectScreen() {
         marginTop: 10
     },
     CompleteText:{
-        fontSize: 30,
+        fontSize: 28,
         fontWeight: "bold",
-        marginBottom: 10
+        color: "#002755",
+        marginVertical: 30
     },
     modalButtonSet: {
         flexDirection: "row",
         justifyContent: "space-between",
         width: 300,
         height: "15%",
+        marginTop: 10
     },
     modalButton1:{
         width: 140,
@@ -205,37 +207,37 @@ export default function ItemSelectScreen() {
       alignItems: 'flex-start',
       width: "100%",
       backgroundColor: 'white',
-      gap: 50,
-      padding: 20,
-      paddingVertical: 50
+      gap: 30,
+      paddingTop: 10,
+      paddingBottom: 50
     },
     buttonCotainer: {
-      backgroundColor: '#007bff',
+      backgroundColor: '#0075FF',
       justifyContent: 'space-between',
       alignItems: "center",
-      padding: 10,
-      width: 300,
-      height: 350,
+      padding: 7,
+      width: 250,
+      height: 260,
       borderRadius: 10
     },
     imgContainer: {
       backgroundColor: 'white',
       justifyContent: 'center',
       alignItems: 'center',
-      width: 280,
-      height: 280,
+      width: 235,
+      height: 200,
       borderRadius: 10,
       position: "relative"
     },
     itemImg: {
-      width: 280,
-      height: 280,
+      width: 235,
+      height: 200,
     },
     buttonTextContainer: {
       backgroundColor: "white",
       justifyContent: 'center',
       alignItems: 'center',
-      width: 280,
+      width: 235,
       height: 40,
       borderRadius: 10
     },
@@ -245,9 +247,9 @@ export default function ItemSelectScreen() {
     },
     percentBar:{
         position: "absolute",
-        bottom: 10,
-        left: 30,
-        right: 30,
+        bottom: 0,
+        left: 10,
+        right: 10,
         height: 30,
         justifyContent: "center",
         alignItems: "center"
