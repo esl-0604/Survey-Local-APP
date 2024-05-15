@@ -51,7 +51,7 @@ export default function ManagerScreen() {
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  width: 120,
+                  width: 150,
                   marginRight: 35,
                 }}>
                 {renderDot('#009FFF')}
@@ -64,7 +64,7 @@ export default function ManagerScreen() {
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  width: 120,
+                  width: 150,
                   marginRight: 35,
                 }}>
                 {renderDot('#BDB2FA')}
@@ -74,7 +74,7 @@ export default function ManagerScreen() {
                 : 0}</Text>
               </View>
               <View
-                style={{flexDirection: 'row', alignItems: 'center', width: 120}}>
+                style={{flexDirection: 'row', alignItems: 'center', width: 150}}>
                 {renderDot('#93FCF8')}
                 <Text style={{color: '#232B5D'}}>TraCloser: {
                 (surveyPersentage.find((item : any) => item.id === "2")?.num)
@@ -88,7 +88,7 @@ export default function ManagerScreen() {
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  width: 120,
+                  width: 150,
                   marginRight: 35,
                 }}>
                 {renderDot('#FFA5BA')}
@@ -101,17 +101,17 @@ export default function ManagerScreen() {
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  width: 120,
+                  width: 150,
                   marginRight: 35,
                 }}>
                 {renderDot('#FFF47C')}
                 <Text style={{color: '#232B5D'}}>Insertrument: {
                 (surveyPersentage.find((item : any) => item.id === "4")?.num)
                 ?(surveyPersentage.find((item : any) => item.id === "4")?.num)
-                : 0}</Text>
+                : 0}</Text> 
               </View>
               <View
-                style={{flexDirection: 'row', alignItems: 'center', width: 120}}>
+                style={{flexDirection: 'row', alignItems: 'center', width: 150}}>
                 {renderDot('#FF6F3C')}
                 <Text style={{color: '#232B5D'}}>Robopera: {
                 (surveyPersentage.find((item : any) => item.id === "5")?.num)

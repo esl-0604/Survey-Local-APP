@@ -1,7 +1,7 @@
 import React from 'react';
 import react, { useEffect, useState } from "react";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { View, StyleSheet, Image,TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image,TouchableOpacity, Platform, StatusBar } from "react-native";
 import ItemSelectScreen from "./screen/ItemSelectScreen";
 import ManagerModal from '@/components/ManageModal';
 import ManagerScreen from './screen/ManagerScreen';
@@ -11,11 +11,6 @@ import { SurveyContext } from "./context";
 export default function Index() {
   const [screen, setScreen] = useState<string>("item");
   const [modalOn, setModalOn] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   console.log(screen);
-  // }, [screen])
-
   const [surveyDataList, setSurveyDataList] = useState<any>([]);
   const [surveyPersentage, setSurveyPercentage] = useState<any>([]);
   const [reload, setReload] = useState(false);
@@ -39,27 +34,18 @@ export default function Index() {
     return result;
   }
 
-const setData = async (value : any) => {
-    try {
-        const jsonValue = JSON.stringify(value);
-        await AsyncStorage.setItem('mySurveyData', jsonValue);
-    } catch (e) {
-        console.log(e);
-    }
-};
-
 const getData = async () => {
     try {
         await AsyncStorage.getItem('mySurveyData')
         .then((data) => {
             if(data){
               const sortedArrayData = JSON.parse(data).sort((a : any, b : any) => new Date(a.DateTime).valueOf() - new Date(b.DateTime).valueOf());
-              console.log(sortedArrayData);
+              // console.log(sortedArrayData);
               // Data List 그대로 저장
               setSurveyDataList(sortedArrayData);
               
               const percentageData = aggregateData(sortedArrayData);
-              console.log(percentageData);
+              // console.log(percentageData);
               // Percent Data 따로 저장
               setSurveyPercentage(percentageData);
             }
@@ -127,8 +113,6 @@ const getData = async () => {
         {screen == "item" ? <ItemSelectScreen /> : null}
         {screen == "complete" ? <></> : null}
         {screen == "manager" ? <ManagerScreen /> : null}
-
-
       </SafeAreaProvider>
     </SurveyContext.Provider>
   );
@@ -141,6 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
   },
   logoContainer: {
     flexDirection: "row",
@@ -150,6 +135,7 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     backgroundColor: 'white',
+    marginTop: 20
   },
   iconContainer:{
     flexDirection: "row",

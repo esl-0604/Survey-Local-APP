@@ -1,38 +1,55 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Text, View, StyleSheet, Image,TouchableOpacity, ScrollView } from "react-native";
 import { ItemList } from "../data/itemData";
 import PercentageBar from "@/components/PercentageBar";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SurveyContext } from "../context";
+import SubmitModal from "@/components/SubmitModal";
 
 export default function ItemSelectScreen() {
     const { surveyDataList, setSurveyDataList, surveyPersentage, setSurveyPercentage, reload, setReload }: any = useContext(SurveyContext)
 
     const [isSelected, setIsSelected] = useState<boolean>(false);
-    const [selectedItem, setSelectedItem] = useState<string>("");
+    const [selectedItem, setSelectedItem] = useState<any[]>([]);
 
     const SelectItem = (index : string) => {
-        setSelectedItem(index);
-        setIsSelected(true);
+        let updateSelectedItem = [...selectedItem];
+        if(updateSelectedItem.includes(index)){
+            updateSelectedItem = updateSelectedItem.filter((item) => item !== index);
+        }
+        else {
+            updateSelectedItem.push(index);
+        }
+        setSelectedItem(updateSelectedItem);
     }
 
-    const SelectItemCancle = () => {
-        setIsSelected(false);
+    useEffect(() => {
+        // console.log(selectedItem);
+    }, [selectedItem])
+    
+    const SelectItemRefresh = () => {
+        setSelectedItem([]);
     }
 
-    const SelectItemConfirm = () => {
-        let updateSurveyData = [...surveyDataList];
-        updateSurveyData.push({
-            DateTime: new Date().toLocaleString(),
-            id: selectedItem,
-            name: ItemList[selectedItem].name
-        })
-
-        setData(updateSurveyData);
-        console.log(updateSurveyData);
-
-        setReload(!reload);
-        setIsSelected(false);
+    const SelectItemSubmit = () => {
+        if(selectedItem.length > 0) {
+            let updateSurveyData = [...surveyDataList];
+            selectedItem.forEach((item) => {
+                updateSurveyData.push({
+                    DateTime: new Date().toLocaleString(),
+                    id: item,
+                    name: ItemList[item].name
+                })
+            })
+    
+            setData(updateSurveyData);
+            // console.log(updateSurveyData);
+    
+            setReload(!reload);
+            setIsSelected(true);
+    
+            SelectItemRefresh();
+        }
     }
 
     const setData = async (value : any) => {
@@ -51,41 +68,11 @@ export default function ItemSelectScreen() {
             <Text style={styles.title}>Product Preference Survey</Text>
             </View>
             <View>
-            <Text style={styles.subtitle}>Please select the products you are interested in.</Text>
+            <Text style={styles.subtitle}><Text style={styles.subtitle1}>[Multiple Choice]</Text> Please select the products you are interested in.</Text>
             </View>
           </View>
-          {isSelected 
-          ?<View style={styles.CompleteTextContainer}>
-            <Text style={styles.CompleteText}>Thank you.</Text>
-            <View 
-                style={styles.buttonCotainer}>
-                <View style={styles.imgContainer}>
-                    <Image
-                    source={ItemList[selectedItem].imgUrl}
-                    style={styles.itemImg}
-                    resizeMode="contain"
-                />
-                </View>
-                <View style={styles.buttonTextContainer}>
-                    <Text style={styles.buttonText}>{ItemList[selectedItem].name}</Text>    
-                </View>
-            </View>
-            <View style={styles.modalButtonSet}> 
-                <TouchableOpacity 
-                    activeOpacity={0.5}
-                    style={styles.modalButton1}
-                    onPress={SelectItemCancle}>
-                    <Text style={styles.ButtonText1}>Cancle</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    activeOpacity={0.5}
-                    style={styles.modalButton2}
-                    onPress={SelectItemConfirm}>
-                    <Text style={styles.ButtonText2}>Confirm</Text>
-                </TouchableOpacity>
-            </View>
-          </View>
-          :<ScrollView style={styles.scrollContainer}>
+          {isSelected ?<SubmitModal modalOn={isSelected} setModalOn={setIsSelected}/> : null}
+        <View style={styles.scrollContainer}>
             <View style={styles.itemContainer}>
                 {Object.keys(ItemList).map((key)=> {
                     const totalNum = surveyDataList?.length;
@@ -94,8 +81,8 @@ export default function ItemSelectScreen() {
                     return(
                         <TouchableOpacity 
                         key={key}
-                        activeOpacity={0.5}
-                        style={styles.buttonCotainer}
+                        activeOpacity={0.95}
+                        style={[styles.buttonCotainer, { backgroundColor: `${selectedItem.includes(key) ? "#0071DB": "#94CBFF"}` }]}
                         onPress={() => SelectItem(key)}>
                         <View style={styles.imgContainer}>
                           <Image
@@ -116,7 +103,29 @@ export default function ItemSelectScreen() {
                     )
                 })}
             </View>
-          </ScrollView>}
+            <View style={styles.submitButtonContainer}>
+            <TouchableOpacity 
+                    activeOpacity={0.5}
+                    style={styles.submitButton2}
+                    onPress={SelectItemSubmit}
+                    >
+                    <Text style={styles.ButtonText2}>Submit</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    activeOpacity={0.5}
+                    style={styles.submitButton1}
+                    onPress={SelectItemRefresh}
+                    >
+                    <Image
+                        source={require('../../assets/images/refresh.png')} 
+                        style={styles.setting}
+                        resizeMode="contain"
+                    />
+                    <Text style={styles.ButtonText3}>reset</Text>
+                </TouchableOpacity>
+            </View>
+          </View>
 
       </View>
     );
@@ -133,7 +142,7 @@ export default function ItemSelectScreen() {
     titleContainer:{
       justifyContent: 'flex-start',
       alignItems: 'center',
-      height: 75,
+      height: 85,
       width: "100%",
       backgroundColor: 'white',
     },
@@ -147,6 +156,12 @@ export default function ItemSelectScreen() {
       color: '#666666',
       marginBottom: 20,
     },
+    subtitle1: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: '#666666',
+        marginBottom: 20,
+      },
     CompleteTextContainer:{
         flex: 1,
         width: "100%",
@@ -199,7 +214,8 @@ export default function ItemSelectScreen() {
     },
     scrollContainer: {
       flex: 1,
-      width: "80%"
+      width: "80%",
+      position: "relative"
     },
     itemContainer:{
       flexDirection: 'row',
@@ -213,7 +229,7 @@ export default function ItemSelectScreen() {
       paddingBottom: 50
     },
     buttonCotainer: {
-      backgroundColor: '#0075FF',
+      backgroundColor: '#94CBFF',
       justifyContent: 'space-between',
       alignItems: "center",
       padding: 7,
@@ -254,5 +270,76 @@ export default function ItemSelectScreen() {
         height: 30,
         justifyContent: "center",
         alignItems: "center"
+    },
+    submitButtonContainer: {
+        position: "absolute",
+        width: 150,
+        height: 150,
+        right: -85,
+        top: 180,
+        // backgroundColor: "black",
+        justifyContent: "space-around",
+        alignItems: "center"
+    },
+    submitButton1:{
+        width: 140,
+        height: 50,
+        paddingVertical: 10,
+        // backgroundColor: "#E3E3E3",
+        borderRadius: 10,
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row"
+    },
+    submitButton2:{
+        width: 140,
+        height: 50,
+        paddingVertical: 10,
+        backgroundColor: "#002755",
+        borderRadius: 10,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    ButtonText3:{
+        fontSize: 20,
+        color: "black",
+        fontWeight: 'bold',
+    },
+    setting: {
+        width: 25,
+        height: 25,
+        marginRight: 13
     }
   });
+
+
+          //   ?<View style={styles.CompleteTextContainer}>
+        //     <Text style={styles.CompleteText}>Thank you.</Text>
+        //     <View 
+        //         style={styles.buttonCotainer}>
+        //         <View style={styles.imgContainer}>
+        //             <Image
+        //             source={ItemList[selectedItem].imgUrl}
+        //             style={styles.itemImg}
+        //             resizeMode="contain"
+        //         />
+        //         </View>
+        //         <View style={styles.buttonTextContainer}>
+        //             <Text style={styles.buttonText}>{ItemList[selectedItem].name}</Text>    
+        //         </View>
+        //     </View>
+        //     <View style={styles.modalButtonSet}> 
+        //         <TouchableOpacity 
+        //             activeOpacity={0.5}
+        //             style={styles.modalButton1}
+        //             onPress={SelectItemCancle}>
+        //             <Text style={styles.ButtonText1}>Cancle</Text>
+        //         </TouchableOpacity>
+        //         <TouchableOpacity 
+        //             activeOpacity={0.5}
+        //             style={styles.modalButton2}
+        //             onPress={SelectItemConfirm}>
+        //             <Text style={styles.ButtonText2}>Confirm</Text>
+        //         </TouchableOpacity>
+        //     </View>
+        //   </View>

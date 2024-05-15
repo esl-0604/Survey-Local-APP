@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   percentageText: {
     position: 'absolute',
     right: 10,
-    top: 1,
+    top: 0,
     color: 'black',
     fontSize: 9,
     fontWeight: "bold"
