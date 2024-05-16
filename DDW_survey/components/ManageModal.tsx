@@ -43,6 +43,7 @@ export default function ManagerModal({modalOn, setModalOn, setScreen}: ManagerMo
 
     const showKeyboard = () => {
         if (hiddenTextInputRef.current) {
+          hiddenTextInputRef.current.blur();
           hiddenTextInputRef.current.focus(); // 숨겨진 TextInput에 포커스를 맞추어 키보드 활성화
         }
       };
