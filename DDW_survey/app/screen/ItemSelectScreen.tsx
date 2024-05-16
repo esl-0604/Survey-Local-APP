@@ -82,7 +82,7 @@ export default function ItemSelectScreen() {
                         <TouchableOpacity 
                         key={key}
                         activeOpacity={0.95}
-                        style={[styles.buttonCotainer, { backgroundColor: `${selectedItem.includes(key) ? "#0071DB": "#94CBFF"}` }]}
+                        style={[styles.buttonCotainer, { backgroundColor: `${selectedItem.includes(key) ? "#0071DB": "#B5DCFF"}` }]}
                         onPress={() => SelectItem(key)}>
                         <View style={styles.imgContainer}>
                           <Image

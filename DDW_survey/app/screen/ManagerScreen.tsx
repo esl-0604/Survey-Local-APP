@@ -55,7 +55,7 @@ export default function ManagerScreen() {
                   marginRight: 35,
                 }}>
                 {renderDot('#009FFF')}
-                <Text style={{color: '#232B5D'}}>Cubot: {
+                <Text style={{color: '#232B5D'}}>Rolling-stitch: {
                 (surveyPersentage.find((item : any) => item.id === "0")?.num)
                 ?(surveyPersentage.find((item : any) => item.id === "0")?.num)
                 : 0}</Text>
@@ -68,7 +68,7 @@ export default function ManagerScreen() {
                   marginRight: 35,
                 }}>
                 {renderDot('#BDB2FA')}
-                <Text style={{color: '#232B5D'}}>Rolling stitch: {
+                <Text style={{color: '#232B5D'}}>TraCloser: {
                 (surveyPersentage.find((item : any) => item.id === "1")?.num)
                 ?(surveyPersentage.find((item : any) => item.id === "1")?.num)
                 : 0}</Text>
@@ -76,7 +76,7 @@ export default function ManagerScreen() {
               <View
                 style={{flexDirection: 'row', alignItems: 'center', width: 150}}>
                 {renderDot('#93FCF8')}
-                <Text style={{color: '#232B5D'}}>TraCloser: {
+                <Text style={{color: '#232B5D'}}>Rolling-Channel: {
                 (surveyPersentage.find((item : any) => item.id === "2")?.num)
                 ?(surveyPersentage.find((item : any) => item.id === "2")?.num)
                 : 0}</Text>
@@ -92,7 +92,7 @@ export default function ManagerScreen() {
                   marginRight: 35,
                 }}>
                 {renderDot('#FFA5BA')}
-                <Text style={{color: '#232B5D'}}>Rolling Channel: {
+                <Text style={{color: '#232B5D'}}>Robopera: {
                 (surveyPersentage.find((item : any) => item.id === "3")?.num)
                 ?(surveyPersentage.find((item : any) => item.id === "3")?.num)
                 : 0}</Text>
@@ -105,7 +105,7 @@ export default function ManagerScreen() {
                   marginRight: 35,
                 }}>
                 {renderDot('#FFF47C')}
-                <Text style={{color: '#232B5D'}}>Insertrument: {
+                <Text style={{color: '#232B5D'}}>Endo-Cubot: {
                 (surveyPersentage.find((item : any) => item.id === "4")?.num)
                 ?(surveyPersentage.find((item : any) => item.id === "4")?.num)
                 : 0}</Text> 
@@ -113,7 +113,7 @@ export default function ManagerScreen() {
               <View
                 style={{flexDirection: 'row', alignItems: 'center', width: 150}}>
                 {renderDot('#FF6F3C')}
-                <Text style={{color: '#232B5D'}}>Robopera: {
+                <Text style={{color: '#232B5D'}}>Insertrument: {
                 (surveyPersentage.find((item : any) => item.id === "5")?.num)
                 ?(surveyPersentage.find((item : any) => item.id === "5")?.num)
                 : 0}</Text>
