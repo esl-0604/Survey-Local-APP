@@ -85,7 +85,7 @@ export default function ManagerModal({modalOn, setModalOn, setScreen}: ManagerMo
                     <TextInput
                         ref={hiddenTextInputRef}
                         style={styles.hiddenInput}
-                        autoFocus={true}
+                        autoFocus={false}
                         onKeyPress={handleKeyPress}
                         defaultValue={pass}
                     />
