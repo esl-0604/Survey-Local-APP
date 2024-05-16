@@ -22,7 +22,7 @@ export default function SubmitModal({modalOn, setModalOn}: SubmitModalProps) {
                     <TouchableOpacity 
                         activeOpacity={0.5}
                         onPress={() => {setModalOn(false);}}>
-                        <View style={styles.modalButton2}><Text style={styles.ButtonText2}>확인</Text></View>
+                        <View style={styles.modalButton2}><Text style={styles.ButtonText2}>Confirm</Text></View>
                     </TouchableOpacity>
 
                 </View>
